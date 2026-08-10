@@ -1,0 +1,7 @@
+{
+  "machine_code": "DONA-01",
+  "machine_name": "Donatello Machine 1",
+  "production_area": "DONA",
+  "daily_capacity": 4,
+  "active": true
+}
