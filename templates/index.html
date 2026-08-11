@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Production Capacity Planner</title>
+</head>
+
+<body>
+    <header>
+        <h1>Production Capacity Planner</h1>
+        <p>Manage production machines and daily capacity.</p>
+    </header>
+
+    <main>
+        <section>
+    <h2>Add a Machine</h2>
+
+    <form id="machine-form">
+<input type="hidden" id="machine-id">
+        <div>
+            <label for="machine-code">Machine Code</label>
+            <input
+                type="text"
+                id="machine-code"
+                name="machine_code"
+                placeholder="e.g. MICH-01"
+                required
+            >
+        </div>
+
+        <div>
+            <label for="machine-name">Machine Name</label>
+            <input
+                type="text"
+                id="machine-name"
+                name="machine_name"
+                placeholder="e.g. Michelangelo Machine 1"
+                required
+            >
+        </div>
+
+        <div>
+            <label for="production-area">Production Area</label>
+            <input
+                type="text"
+                id="production-area"
+                name="production_area"
+                placeholder="e.g. MICH"
+                required
+            >
+        </div>
+
+        <div>
+            <label for="daily-capacity">Daily Capacity</label>
+            <input
+                type="number"
+                id="daily-capacity"
+                name="daily_capacity"
+                min="1"
+                required
+            >
+        </div>
+
+        <div>
+            <label for="active">Active</label>
+            <input
+                type="checkbox"
+                id="active"
+                name="active"
+                checked
+            >
+        </div>
+
+        <button type="submit" id="submit-button">
+    Add Machine
+</button>
+
+<button type="button" id="cancel-update-button" hidden>
+    Cancel Update
+</button>
+    </form>
+
+    <p id="form-message"></p>
+</section>
+        <section>
+            <h2>Machines</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Machine Name</th>
+                        <th>Production Area</th>
+                        <th>Daily Capacity</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="machine-table-body">
+                    <tr>
+                        <td colspan="6">Machine data will appear here.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+<script src="{{ url_for('static', filename='js/machines.js') }}"></script>
+</body>
+</html>
