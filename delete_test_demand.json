@@ -1,0 +1,8 @@
+{
+  "product_code": "TEST-DELETE",
+  "product_name": "Temporary Delete Test",
+  "machine_type": "DONA",
+  "required_lots": 1,
+  "required_date": "2026-08-31",
+  "active": true
+}

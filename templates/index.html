@@ -113,8 +113,117 @@
                 </tbody>
             </table>
         </section>
-    </main>
+
+        <section>
+
+            <section>
+    <h2>Production Demand</h2>
+
+    <p>
+        Manage the production lots required for each machine type.
+    </p>
+
+    <form id="demand-form">
+        <input type="hidden" id="demand-id">
+
+        <div>
+            <label for="product-code">Product Code</label>
+            <input
+                type="text"
+                id="product-code"
+                placeholder="e.g. PROD-003"
+                required
+            >
+        </div>
+
+        <div>
+            <label for="product-name">Product Name</label>
+            <input
+                type="text"
+                id="product-name"
+                placeholder="e.g. Product Gamma"
+                required
+            >
+        </div>
+
+        <div>
+            <label for="machine-type">Machine Type</label>
+            <select id="machine-type" required>
+                <option value="">Select a machine type</option>
+                <option value="LEON">Leonardo</option>
+                <option value="RAPH">Raphael</option>
+                <option value="DONA">Donatello</option>
+                <option value="MICH">Michelangelo</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="required-lots">Required Lots</label>
+            <input
+                type="number"
+                id="required-lots"
+                min="1"
+                required
+            >
+        </div>
+
+        <div>
+            <label for="required-date">Required Date</label>
+            <input
+                type="date"
+                id="required-date"
+                required
+            >
+        </div>
+
+        <div>
+            <label for="demand-active">Active</label>
+            <input
+                type="checkbox"
+                id="demand-active"
+                checked
+            >
+        </div>
+
+        <button type="submit" id="demand-submit-button">
+            Add Demand
+        </button>
+
+        <button
+            type="button"
+            id="cancel-demand-update-button"
+            hidden
+        >
+            Cancel Update
+        </button>
+    </form>
+
+    <p id="demand-form-message"></p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Product Code</th>
+                <th>Product Name</th>
+                <th>Machine Type</th>
+                <th>Required Lots</th>
+                <th>Required Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody id="demand-table-body">
+            <tr>
+                <td colspan="7">
+                    Demand data will appear here.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
 
 <script src="{{ url_for('static', filename='js/machines.js') }}"></script>
+<script src="{{ url_for('static', filename='js/demand.js') }}"></script>
 </body>
 </html>

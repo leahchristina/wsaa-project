@@ -19,6 +19,21 @@ def create_database():
         )
     """)
 
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS demand (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        product_code TEXT NOT NULL,
+        product_name TEXT NOT NULL,
+        machine_type TEXT NOT NULL
+            CHECK (machine_type IN ('LEON', 'RAPH', 'DONA', 'MICH')),
+        required_lots INTEGER NOT NULL
+            CHECK (required_lots > 0),
+        required_date TEXT NOT NULL,
+        active INTEGER NOT NULL DEFAULT 1
+            CHECK (active IN (0, 1))
+    )
+""")
+
     connection.commit()
     connection.close()
 

@@ -214,3 +214,11 @@ td button.recommission-button:hover {
         padding: 10px;
     }
 }
+td button.reactivate-button {
+    background-color: #176b55;
+    color: white;
+}
+
+td button.reactivate-button:hover {
+    background-color: #125342;
+}
