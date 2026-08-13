@@ -5,6 +5,7 @@ from flask import Flask, jsonify, request, render_template
 
 import machineDAO
 import demandDAO
+import planner
 
 app = Flask(__name__)
 
@@ -280,6 +281,31 @@ def delete_demand(demand_id):
     demandDAO.delete_demand(demand_id)
 
     return "", 204
+
+@app.route("/api/planning-summary", methods=["GET"])
+def get_planning_summary():
+    year = request.args.get("year", type=int)
+    month = request.args.get("month", type=int)
+
+    if year is None or month is None:
+        return jsonify({
+            "error": "Validation failed",
+            "message": "Year and month are required."
+        }), 400
+
+    if month < 1 or month > 12:
+        return jsonify({
+            "error": "Validation failed",
+            "message": "Month must be between 1 and 12."
+        }), 400
+
+    summary = planner.generate_capacity_summary(year, month)
+
+    return jsonify({
+        "year": year,
+        "month": month,
+        "summary": summary
+    }), 200
 
 if __name__ == "__main__":
     app.run(debug=True)

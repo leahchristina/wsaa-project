@@ -223,7 +223,61 @@
     </table>
 </section>
 
+<section>
+    <h2>Generate Production Plan</h2>
+
+    <p>
+        Select a month to compare active demand with available
+        machine capacity.
+    </p>
+
+    <form id="planning-form">
+        <div>
+            <label for="planning-month">Planning Month</label>
+
+            <input
+                type="month"
+                id="planning-month"
+                required
+            >
+        </div>
+
+        <button type="submit" id="generate-plan-button">
+            Generate Plan
+        </button>
+    </form>
+
+    <p id="planning-message"></p>
+
+    <div id="planning-results" hidden>
+        <h3>Capacity Summary</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Machine Type</th>
+                    <th>Available Machines</th>
+                    <th>Available Days</th>
+                    <th>Total Capacity</th>
+                    <th>Required Lots</th>
+                    <th>Capacity Balance</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+
+            <tbody id="planning-table-body">
+                <tr>
+                    <td colspan="7">
+                        Planning results will appear here.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
 <script src="{{ url_for('static', filename='js/machines.js') }}"></script>
 <script src="{{ url_for('static', filename='js/demand.js') }}"></script>
+<script src="{{ url_for('static', filename='js/planning.js') }}"></script>
 </body>
 </html>
