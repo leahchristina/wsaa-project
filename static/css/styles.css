@@ -180,3 +180,37 @@ td button.recommission-button {
 td button.recommission-button:hover {
     background-color: #125342;
 }
+
+@media (max-width: 750px) {
+    header {
+        padding: 24px 16px;
+    }
+
+    header h1 {
+        font-size: 1.6rem;
+    }
+
+    main {
+        width: 94%;
+        margin: 20px auto;
+    }
+
+    section {
+        padding: 18px;
+    }
+
+    #machine-form {
+        grid-template-columns: 1fr;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    th,
+    td {
+        padding: 10px;
+    }
+}
