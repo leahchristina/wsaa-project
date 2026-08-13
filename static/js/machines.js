@@ -41,11 +41,12 @@ ${
         `
         : `
             <button
-                type="button"
-                onclick="recommissionMachine(${machine.id})"
-            >
-                Recommission
-            </button>
+            type="button"
+            class="recommission-button"
+            onclick="recommissionMachine(${machine.id})"
+>
+    Recommission
+</button>
         `
 }
     </td>
