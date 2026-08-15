@@ -1,11 +1,14 @@
 import sqlite3
 from datetime import datetime
 
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template, make_response
 
 import machineDAO
 import demandDAO
 import planner
+
+import csv
+import io
 
 app = Flask(__name__)
 
@@ -306,6 +309,80 @@ def get_planning_summary():
         "month": month,
         "summary": summary
     }), 200
+
+@app.route("/api/production-plan", methods=["GET"])
+def get_production_plan():
+    year = request.args.get("year", type=int)
+    month = request.args.get("month", type=int)
+
+    if year is None or month is None:
+        return jsonify({
+            "error": "Validation failed",
+            "message": "Year and month are required."
+        }), 400
+
+    if month < 1 or month > 12:
+        return jsonify({
+            "error": "Validation failed",
+            "message": "Month must be between 1 and 12."
+        }), 400
+
+    plan = planner.generate_daily_schedule(year, month)
+
+    return jsonify({
+        "year": year,
+        "month": month,
+        "schedule": plan["schedule"],
+        "unallocated": plan["unallocated"]
+    }), 200
+
+@app.route("/api/production-plan/export.csv", methods=["GET"])
+def export_production_plan_csv():
+    year = request.args.get("year", type=int)
+    month = request.args.get("month", type=int)
+
+    if year is None or month is None:
+        return jsonify({
+            "error": "Validation failed",
+            "message": "Year and month are required."
+        }), 400
+
+    if month < 1 or month > 12:
+        return jsonify({
+            "error": "Validation failed",
+            "message": "Month must be between 1 and 12."
+        }), 400
+
+    plan = planner.generate_daily_schedule(year, month)
+
+    csv_output = io.StringIO()
+
+    field_names = [
+        "production_date",
+        "machine_code",
+        "machine_type",
+        "product_code",
+        "product_name",
+        "allocated_lots"
+    ]
+
+    writer = csv.DictWriter(
+        csv_output,
+        fieldnames=field_names
+    )
+
+    writer.writeheader()
+    writer.writerows(plan["schedule"])
+
+    response = make_response(csv_output.getvalue())
+
+    response.headers["Content-Type"] = "text/csv"
+
+    response.headers["Content-Disposition"] = (
+        f"attachment; filename=production_plan_{year}_{month:02d}.csv"
+    )
+
+    return response
 
 if __name__ == "__main__":
     app.run(debug=True)

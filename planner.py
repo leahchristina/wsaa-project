@@ -133,9 +133,130 @@ def generate_capacity_summary(year, month):
 
     return summary
 
+def generate_daily_schedule(year, month):
+    available_dates = get_available_dates(year, month)
+
+    machines = [
+        machine
+        for machine in machineDAO.get_all_machines()
+        if machine["active"]
+    ]
+
+    demand_records = []
+
+    for demand in demandDAO.get_all_demand():
+        if not demand["active"]:
+            continue
+
+        demand_year, demand_month, _ = map(
+            int,
+            demand["required_date"].split("-")
+        )
+
+        if demand_year == year and demand_month == month:
+            demand_records.append(demand)
+
+    demand_records.sort(
+        key=lambda item: (
+            item["required_date"],
+            item["product_code"]
+        )
+    )
+
+    machines.sort(key=lambda item: item["machine_code"])
+
+    schedule = []
+    unallocated = []
+
+    used_capacity = {}
+
+    for demand in demand_records:
+        remaining_lots = demand["required_lots"]
+
+        eligible_machines = [
+            machine
+            for machine in machines
+            if machine["production_area"]
+            == demand["machine_type"]
+        ]
+
+        for planning_date in available_dates:
+            for machine in eligible_machines:
+                capacity_key = (
+                    planning_date.isoformat(),
+                    machine["id"]
+                )
+
+                lots_already_used = used_capacity.get(
+                    capacity_key,
+                    0
+                )
+
+                remaining_machine_capacity = (
+                    machine["daily_capacity"]
+                    - lots_already_used
+                )
+
+                if remaining_machine_capacity <= 0:
+                    continue
+
+                allocated_lots = min(
+                    remaining_lots,
+                    remaining_machine_capacity
+                )
+
+                schedule.append({
+                    "production_date":
+                        planning_date.isoformat(),
+                    "machine_code":
+                        machine["machine_code"],
+                    "machine_type":
+                        machine["production_area"],
+                    "product_code":
+                        demand["product_code"],
+                    "product_name":
+                        demand["product_name"],
+                    "allocated_lots":
+                        allocated_lots
+                })
+
+                used_capacity[capacity_key] = (
+                    lots_already_used + allocated_lots
+                )
+
+                remaining_lots -= allocated_lots
+
+                if remaining_lots == 0:
+                    break
+
+            if remaining_lots == 0:
+                break
+
+        if remaining_lots > 0:
+            unallocated.append({
+                "product_code": demand["product_code"],
+                "product_name": demand["product_name"],
+                "machine_type": demand["machine_type"],
+                "required_lots": demand["required_lots"],
+                "unallocated_lots": remaining_lots,
+                "reason": "Insufficient active machine capacity"
+            })
+
+    return {
+        "schedule": schedule,
+        "unallocated": unallocated
+    }
+
 
 if __name__ == "__main__":
-    summary_results = generate_capacity_summary(2026, 8)
+    plan = generate_daily_schedule(2026, 8)
 
-    for result in summary_results:
-        print(result)
+    print("Schedule:")
+
+    for allocation in plan["schedule"]:
+        print(allocation)
+
+    print("\nUnallocated demand:")
+
+    for item in plan["unallocated"]:
+        print(item)

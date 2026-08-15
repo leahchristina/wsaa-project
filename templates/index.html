@@ -245,13 +245,43 @@
         <button type="submit" id="generate-plan-button">
             Generate Plan
         </button>
+        <button type="button" id="export-csv-button" disabled>
+    Export Schedule to CSV
+</button>
     </form>
 
     <p id="planning-message"></p>
 
-    <div id="planning-results" hidden>
-        <h3>Capacity Summary</h3>
+<div id="planning-results" hidden>
+    <div id="plan-overview">
+    <div class="summary-card">
+        <span>Total Required Lots</span>
+        <strong id="total-required-lots">0</strong>
+    </div>
 
+    <div class="summary-card">
+        <span>Total Allocated Lots</span>
+        <strong id="total-allocated-lots">0</strong>
+    </div>
+
+    <div class="summary-card">
+        <span>Total Unallocated Lots</span>
+        <strong id="total-unallocated-lots">0</strong>
+    </div>
+
+    <div class="summary-card">
+        <span>Plan Status</span>
+        <strong id="plan-status">Not Generated</strong>
+    </div>
+
+    <div class="summary-card">
+        <span>Planned Completion Date</span>
+        <strong id="completion-date">Not Available</strong>
+    </div>
+</div>
+    <h3>Capacity Summary</h3>
+
+    <div class="table-wrapper">
         <table>
             <thead>
                 <tr>
@@ -264,6 +294,69 @@
                     <th>Result</th>
                 </tr>
             </thead>
+
+            <tbody id="planning-table-body">
+                <tr>
+                    <td colspan="7">
+                        Planning results will appear here.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Daily Production Schedule</h3>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Production Date</th>
+                    <th>Machine</th>
+                    <th>Machine Type</th>
+                    <th>Product Code</th>
+                    <th>Product Name</th>
+                    <th>Allocated Lots</th>
+                </tr>
+            </thead>
+
+            <tbody id="schedule-table-body">
+                <tr>
+                    <td colspan="6">
+                        Daily schedule results will appear here.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="unallocated-results" hidden>
+        <h3>Unallocated Demand</h3>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product Code</th>
+                        <th>Product Name</th>
+                        <th>Machine Type</th>
+                        <th>Required Lots</th>
+                        <th>Unallocated Lots</th>
+                        <th>Reason</th>
+                    </tr>
+                </thead>
+
+                <tbody id="unallocated-table-body">
+                    <tr>
+                        <td colspan="6">
+                            Unallocated demand will appear here.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
             <tbody id="planning-table-body">
                 <tr>

@@ -316,6 +316,47 @@ td button.recommission-button:hover {
     margin-top: 24px;
 }
 
+/* Production plan overview */
+
+#plan-overview {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(170px, 1fr)
+    );
+    gap: 16px;
+    margin: 24px 0 30px;
+}
+
+.summary-card {
+    padding: 18px;
+    border: 1px solid #d9e0e7;
+    border-radius: 7px;
+    background-color: #f7f9fb;
+}
+
+.summary-card span {
+    display: block;
+    margin-bottom: 8px;
+    color: #526473;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.summary-card strong {
+    display: block;
+    color: #16324f;
+    font-size: 1.35rem;
+}
+
+.status-feasible {
+    color: #176b55 !important;
+}
+
+.status-shortfall {
+    color: #b42318 !important;
+}
+
 @media (max-width: 750px) {
     header {
         padding: 24px 16px;
