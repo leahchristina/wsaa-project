@@ -1,7 +1,7 @@
 import sqlite3
 from datetime import datetime
 
-from flask import Flask, jsonify, request, render_template, make_response
+from flask import (Flask, jsonify, request, render_template, make_response, Response)
 
 import machineDAO
 import demandDAO
@@ -9,6 +9,8 @@ import planner
 
 import csv
 import io
+
+import xml.etree.ElementTree as ET
 
 app = Flask(__name__)
 
@@ -383,6 +385,82 @@ def export_production_plan_csv():
     )
 
     return response
+
+@app.route("/api/planning-summary.xml", methods=["GET"])
+def get_planning_summary_xml():
+    year = request.args.get("year", type=int)
+    month = request.args.get("month", type=int)
+
+    if year is None or month is None:
+        return jsonify({
+            "error": "Validation failed",
+            "message": "Year and month are required."
+        }), 400
+
+    if month < 1 or month > 12:
+        return jsonify({
+            "error": "Validation failed",
+            "message": "Month must be between 1 and 12."
+        }), 400
+
+    summary = planner.generate_capacity_summary(year, month)
+
+    root = ET.Element("planningSummary")
+    root.set("year", str(year))
+    root.set("month", str(month))
+
+    for item in summary:
+        machine_element = ET.SubElement(
+            root,
+            "machineType"
+        )
+
+        machine_element.set(
+            "code",
+            item["machine_type"]
+        )
+
+        ET.SubElement(
+            machine_element,
+            "availableMachines"
+        ).text = str(item["available_machines"])
+
+        ET.SubElement(
+            machine_element,
+            "availableDays"
+        ).text = str(item["available_days"])
+
+        ET.SubElement(
+            machine_element,
+            "totalCapacity"
+        ).text = str(item["total_capacity"])
+
+        ET.SubElement(
+            machine_element,
+            "requiredLots"
+        ).text = str(item["required_lots"])
+
+        ET.SubElement(
+            machine_element,
+            "capacityBalance"
+        ).text = str(item["capacity_balance"])
+
+        ET.SubElement(
+            machine_element,
+            "result"
+        ).text = item["result"]
+
+    xml_content = ET.tostring(
+        root,
+        encoding="utf-8",
+        xml_declaration=True
+    )
+
+    return Response(
+        xml_content,
+        status=200,
+        mimetype="application/xml"
+    )
 
 if __name__ == "__main__":
     app.run(debug=True)
