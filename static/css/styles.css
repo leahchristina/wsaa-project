@@ -398,6 +398,54 @@ td button.recommission-button:hover {
     color: #176b55;
 }
 
+.csv-import-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.csv-import-controls input[type="file"] {
+    flex: 1 1 280px;
+    min-width: 0;
+    max-width: 100%;
+    margin: 0;
+}
+
+.csv-import-controls button {
+    flex: 0 0 auto;
+    margin: 0;
+    white-space: nowrap;
+}
+
+#download-template-button {
+    padding: 9px 16px;
+    border: 1px solid #2b6ca3;
+    border-radius: 5px;
+    background-color: white;
+    color: #2b6ca3;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#download-template-button:hover {
+    background-color: #eaf1f7;
+}
+
+.table-wrapper {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.table-wrapper table {
+    width: 100%;
+    min-width: 700px;
+}
+
+
 @media (max-width: 750px) {
     header {
         padding: 24px 16px;
@@ -442,4 +490,17 @@ td button.reactivate-button {
 
 td button.reactivate-button:hover {
     background-color: #125342;
+
+.csv-import-controls {
+    flex-direction: column;
+    align-items: stretch;
 }
+
+.csv-import-controls input[type="file"],
+.csv-import-controls button {
+    width: 100%;
+}
+
+.csv-import-controls button {
+    text-align: center;
+}}
