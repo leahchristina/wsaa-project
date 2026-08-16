@@ -586,5 +586,41 @@ def import_demand_csv():
         "records": created_records
     }), 201
 
+@app.route("/api/demand/template.csv", methods=["GET"])
+def download_demand_csv_template():
+    csv_output = io.StringIO()
+
+    writer = csv.writer(csv_output)
+
+    writer.writerow([
+        "product_code",
+        "product_name",
+        "machine_type",
+        "required_lots",
+        "required_date",
+        "active"
+    ])
+
+    writer.writerow([
+        "PROD-EXAMPLE",
+        "Example Product",
+        "LEON",
+        "10",
+        "2026-09-30",
+        "true"
+    ])
+
+    response = make_response(csv_output.getvalue())
+
+    response.headers["Content-Type"] = (
+        "text/csv; charset=utf-8"
+    )
+
+    response.headers["Content-Disposition"] = (
+        "attachment; filename=demand_import_template.csv"
+    )
+
+    return response
+
 if __name__ == "__main__":
     app.run(debug=True)

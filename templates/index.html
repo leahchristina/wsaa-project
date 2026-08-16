@@ -136,12 +136,13 @@
         accept=".csv,text/csv"
     >
 
-    <button type="button" id="import-csv-button">
-        Import CSV
-    </button>
-
-    <p id="csv-import-message"></p>
-</div>
+<button
+    type="button"
+    id="download-template-button"
+    onclick="window.location.href='/api/demand/template.csv'"
+>
+    Download CSV Template
+</button>
 
     <form id="demand-form">
         <input type="hidden" id="demand-id">
