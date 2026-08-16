@@ -1,0 +1,4 @@
+product_code,product_name,machine_type,required_lots,required_date,active
+PROD-004,Product Delta,MICH,10,2026-09-30,true
+PROD-005,Product Echo,LEON,18,2026-09-30,true
+PROD-006,Product Foxtrot,RAPH,14,2026-09-30,true

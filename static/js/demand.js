@@ -312,6 +312,66 @@ function resetDemandForm() {
     ).textContent = "";
 }
 
+async function importDemandCsv() {
+    const fileInput = document.getElementById(
+        "demand-csv-file"
+    );
+
+    const message = document.getElementById(
+        "csv-import-message"
+    );
+
+    if (fileInput.files.length === 0) {
+        message.textContent = "Please select a CSV file.";
+        return;
+    }
+
+    const selectedFile = fileInput.files[0];
+    const formData = new FormData();
+
+    formData.append("file", selectedFile);
+
+    message.textContent = "Importing demand records...";
+
+    try {
+        const response = await fetch(
+            "/api/demand/import.csv",
+            {
+                method: "POST",
+                body: formData
+            }
+        );
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            let errorMessage =
+                result.message || result.error;
+
+            if (result.details) {
+                const rowErrors = result.details.map(
+                    detail =>
+                        `Row ${detail.row}: ${detail.message}`
+                );
+
+                errorMessage += " " + rowErrors.join(" ");
+            }
+
+            throw new Error(errorMessage);
+        }
+
+        message.textContent =
+            `${result.records_imported} demand records ` +
+            `imported successfully.`;
+
+        fileInput.value = "";
+
+        await loadDemand();
+    } catch (error) {
+        message.textContent = error.message;
+    }
+}
+
 
 document.addEventListener("DOMContentLoaded", function () {
     loadDemand();
@@ -330,4 +390,13 @@ document.addEventListener("DOMContentLoaded", function () {
         "click",
         resetDemandForm
     );
+
+    const importButton = document.getElementById(
+    "import-csv-button"
+);
+
+importButton.addEventListener(
+    "click",
+    importDemandCsv
+);
 });

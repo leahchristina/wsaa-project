@@ -462,5 +462,129 @@ def get_planning_summary_xml():
         mimetype="application/xml"
     )
 
+@app.route("/api/demand/import.csv", methods=["POST"])
+def import_demand_csv():
+    if "file" not in request.files:
+        return jsonify({
+            "error": "No file provided",
+            "message": "Please select a CSV file."
+        }), 400
+
+    uploaded_file = request.files["file"]
+
+    if not uploaded_file.filename:
+        return jsonify({
+            "error": "No file selected",
+            "message": "Please select a CSV file."
+        }), 400
+
+    if not uploaded_file.filename.lower().endswith(".csv"):
+        return jsonify({
+            "error": "Invalid file type",
+            "message": "The uploaded file must be a CSV file."
+        }), 400
+
+    try:
+        file_text = uploaded_file.stream.read().decode("utf-8-sig")
+        csv_reader = csv.DictReader(io.StringIO(file_text))
+    except UnicodeDecodeError:
+        return jsonify({
+            "error": "Invalid file encoding",
+            "message": "The CSV file must use UTF-8 encoding."
+        }), 400
+
+    required_columns = {
+        "product_code",
+        "product_name",
+        "machine_type",
+        "required_lots",
+        "required_date",
+        "active"
+    }
+
+    actual_columns = set(csv_reader.fieldnames or [])
+
+    if not required_columns.issubset(actual_columns):
+        missing_columns = sorted(
+            required_columns - actual_columns
+        )
+
+        return jsonify({
+            "error": "Missing CSV columns",
+            "message": (
+                "Missing required columns: "
+                + ", ".join(missing_columns)
+            )
+        }), 400
+
+    validated_records = []
+    validation_errors = []
+
+    for row_number, row in enumerate(csv_reader, start=2):
+        try:
+            required_lots = int(row["required_lots"])
+        except (TypeError, ValueError):
+            validation_errors.append({
+                "row": row_number,
+                "message": "Required lots must be a whole number."
+            })
+            continue
+
+        active_text = row["active"].strip().lower()
+
+        if active_text not in ("true", "false"):
+            validation_errors.append({
+                "row": row_number,
+                "message": "Active must be true or false."
+            })
+            continue
+
+        demand_record = {
+            "product_code": row["product_code"].strip(),
+            "product_name": row["product_name"].strip(),
+            "machine_type": row["machine_type"].strip().upper(),
+            "required_lots": required_lots,
+            "required_date": row["required_date"].strip(),
+            "active": active_text == "true"
+        }
+
+        validation_error = validate_demand(demand_record)
+
+        if validation_error:
+            validation_errors.append({
+                "row": row_number,
+                "message": validation_error
+            })
+        else:
+            validated_records.append(demand_record)
+
+    if validation_errors:
+        return jsonify({
+            "error": "CSV validation failed",
+            "message": "No records were imported.",
+            "details": validation_errors
+        }), 400
+
+    if not validated_records:
+        return jsonify({
+            "error": "Empty CSV file",
+            "message": "The CSV file contains no demand records."
+        }), 400
+
+    created_records = []
+
+    for demand_record in validated_records:
+        created_record = demandDAO.create_demand(
+            demand_record
+        )
+
+        created_records.append(created_record)
+
+    return jsonify({
+        "message": "Demand imported successfully.",
+        "records_imported": len(created_records),
+        "records": created_records
+    }), 201
+
 if __name__ == "__main__":
     app.run(debug=True)

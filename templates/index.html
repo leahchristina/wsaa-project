@@ -123,6 +123,26 @@
         Manage the production lots required for each machine type.
     </p>
 
+    <div id="csv-import-section">
+    <h3>Import Demand from CSV</h3>
+
+    <p>
+        Select a CSV file containing monthly demand figures.
+    </p>
+
+    <input
+        type="file"
+        id="demand-csv-file"
+        accept=".csv,text/csv"
+    >
+
+    <button type="button" id="import-csv-button">
+        Import CSV
+    </button>
+
+    <p id="csv-import-message"></p>
+</div>
+
     <form id="demand-form">
         <input type="hidden" id="demand-id">
 
