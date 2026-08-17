@@ -1,55 +1,85 @@
 # Production Capacity Scenario Planner
 
-A Flask web application for managing production machines, recording monthly production demand, and generating capacity-based production plans.
+https://img.shields.io/badge/Python-3.12-2E4AED
+![Flask](https://img.shields.io/badge/Flask-Web%20API-000075)
+g.shields.io/badge/Database-SQLite-00BFDE
+![JavaScript](https://img.shields.io/badgeAX-8054F2
+![Status](https://img.shields.io/badge/Status-Deployed Flask web application for managing production machines, recording monthly production demand and generating capacity-based production plans.
 
 The application was developed for the Web Services and Applications module. It demonstrates RESTful APIs, CRUD operations, JSON, XML, CSV processing, HTTP methods and status codes, SQLite, Python, HTML, JavaScript, AJAX and CSS.
 
 ## Hosted Application
 
-The hosted application will be available at:
+https://img.shields.io/badge/Open%20Application-PythonAnywhere-2E4AED?style=for-the-badge](https://leahchristina.pythonanywhere.com)
 
-**Hosted URL:** https://leahchristina.pytho**nywhere.com
+> **Availability:** The application is hosted using a free PythonAnywhere account and is expected to remain available until **17 September 2026**.
 
-Note that this has been hosted on PythonAnywhere under a free domain. The webpage will be available until **September 17, 2026.**
+## Quick Links
 
-## GitHub Repository
+- [Open the hosted application](https://leahchristina.pythonanywhere.com)
+- #main-features
+- #local-installation
+- #running-the-automated-tests
+- #rest-api
+- #known-limitations
 
-https://github.com/leahchristina/wsaa-project
+
+## Hosted Application
+
+[![Open Hosted Application](https://img.shields.io/badge/Open%20Application-PythonAnywhere-2E4AED?style=for-the-badge)](https://leahchristina.eu.pythonanywhere.com/)
+
+> **Availability:** This project is hosted on a free PythonAnywhere account and is expected to remain available until **17 September 2026**.
+
 
 ## Project Purpose
 
-Production planning is often completed using spreadsheets. This can make it difficult to compare demand against available capacity, identify shortfalls and understand the effect of taking a machine out of service.
+I wanted to create something that would be useful in my current role. Production planning is currently completed using manual calculations and spreadsheets. This can make it difficult to compare demand against available capacity, identify shortfalls and understand the effect of taking a machine out of service for maintenance. 
+
+This project is a replica of what I would require to complete production planning more effectively, with the intellectual property removed. 
 
 The Production Capacity Scenario Planner provides a simple browser-based system that allows users to:
 
-- Maintain production machines and their daily capacities
-- Add and update monthly production demand
-- Import demand records from CSV
+- Maintain a list of production machines and their daily capacities
+- Add and update the monthly production demand
+- Import demand records from CSV files
 - Decommission and recommission machines
-- Deactivate and reactivate demand records
 - Calculate capacity by machine type
 - Generate a daily production schedule
 - Identify unallocated demand and capacity shortfalls
 - Export the generated schedule to CSV
 - Retrieve planning information through JSON and XML APIs
 
-All machine, product and demand names in this repository are fictional. Leonardo, Raphael, Donatello and Michelangelo are used as fictional machine types to avoid exposing company intellectual property.
+> **Data protection note:** All machine, product and demand names in this repository are fictional. Leonardo, Raphael, Donatello and Michelangelo are used as fictional machine types to avoid exposing company intellectual property.
 
 ## Main Features
 
-### Machine Management
+## Main Features
+
+| Area | Capability |
+|---|---|
+| Machine management | Add, view, update, decommission, recommission and delete machines |
+| Demand management | Add, update, deactivate, reactivate and delete monthly demand |
+| CSV processing | Validate and import demand from CSV files |
+| Capacity planning | Compare monthly demand with available machine capacity |
+| Scheduling | Allocate lots to active machines by production date |
+| Exception management | Identify capacity shortfalls and unallocated demand |
+| Data export | Export the generated production schedule to CSV |
+| Web services | Access planning data through JSON and XML endpoints |
+| Testing | Run automated API and calendar-rule tests |
+| Hosting | Access the deployed application through PythonAnywhere |
+
+### 1. Machine Management
 
 Users can:
 
 - Add a machine
 - View all machines
 - Update machine details and daily capacity
-- Decommission a machine
-- Recommission a machine
+- Decommission or recommission a machine
 
 Machines are decommissioned rather than permanently removed. This is a soft-delete approach that preserves machine information for historical planning records.
 
-### Production Demand Management
+### 2. Production Demand Management
 
 Users can:
 
@@ -88,21 +118,18 @@ A CSV template can be downloaded from the application or directly from:
 /api/demand/template.csv
 ```
 
-### Production Planning
+### 3. Production Planning
 
 The user selects a planning month and generates a production plan.
 
 The planning logic:
 
-- Includes active machines only
-- Includes active demand only
+- Includes active machines & demand only
 - Matches demand to the required machine type
 - Uses each machine's configured daily lot capacity
 - Allocates demand in required-date and product-code order
-- Assumes 24/7 manufacturing
-- Excludes 25 and 26 December
+- Assumes 24/7 manufacturing (excluding 25/26 Dec)
 - Reports any lots that cannot be allocated
-- Calculates the planned completion date
 - Identifies whether the plan is feasible
 
 The four fictional machine types are:
@@ -156,21 +183,30 @@ A read-only XML endpoint is also provided to demonstrate an alternative web-serv
 /api/planning-summary.xml?year=2026&month=8
 ```
 
+## Suggested Demonstration
+
+To explore the application:
+
+1. Open the [hosted application](https://leahchristina.pythonanywhere.com).
+2. Review the active and decommissioned machines.
+3. Add or import a monthly demand record.
+4. Select a planning month.
+5. Click **Generate Plan**.
+6. Review the capacity summary and daily production schedule.
+7. Check whether any demand is unallocated.
+8. Export the production schedule to CSV.
+9. Open the XML planning-summary endpoint.
+
 ## Technologies Used
 
-- Python
-- Flask
-- SQLite
-- Python `sqlite3`
-- HTML5
-- CSS3
-- Vanilla JavaScript
-- Fetch API and AJAX
-- JSON
-- XML
-- CSV
-- Git and GitHub
-- PythonAnywhere
+- **Back end:** Python, Flask
+- **Database:** SQLite and Python's `sqlite3` module
+- **Front end:** HTML5, CSS3 and vanilla JavaScript
+- **Asynchronous communication:** Fetch API and AJAX
+- **Data formats:** JSON, XML and CSV
+- **Testing:** Python `unittest` and Flask test client
+- **Version control:** Git and GitHub
+- **Hosting:** PythonAnywhere
 
 ## Project Structure
 
@@ -213,11 +249,12 @@ Before running the application, ensure the following are installed:
 
 The project was developed on Windows using Anaconda and Visual Studio Code.
 
+
 ### 1. Clone the repository
 
 ```bash
 git clone https://github.com/leahchristina/wsaa-project.git
-```
+cd wsaa-project
 
 Move into the project folder:
 
