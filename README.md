@@ -1,22 +1,16 @@
 # Production Capacity Scenario Planner
 
-![Python](https://img.shields.io/badge/Python-3.12-2E4AED)
-![Flask](https://img.shields.io/badge/Flask-Web%20API-000075)
-![Database](https://img.shields.io/badge/Database-SQLite-00BFDE)
-![JavaScript](https://img.shields.io/badge/JavaScript-AJAX-8054F2)
-![Status](https://img.shields.io/badge/Status-Deployed-16834A)
+This is a Flask web application for managing production machines, recording monthly production demand and generating capacity-based production plans.
 
-A Flask web application for managing production machines, recording monthly production demand and generating capacity-based production plans.
+The application was developed for my Big Project portion the Web Services and Applications module. It demonstrates some of the topics covered throughout the module - RESTful APIs, CRUD operations, JSON, XML, CSV processing, HTTP methods and status codes, SQLite, Python, HTML, JavaScript, AJAX and CSS.
 
-The application was developed for the Web Services and Applications module. It demonstrates RESTful APIs, CRUD operations, JSON, XML, CSV processing, HTTP methods and status codes, SQLite, Python, HTML, JavaScript, AJAX and CSS.
-
-## Hosted Application
+## 🚀 Hosted Application
 
 [![Open Hosted Application](https://img.shields.io/badge/Open%20Application-PythonAnywhere-2E4AED?style=for-the-badge)](https://leahchristina.eu.pythonanywhere.com)
 
 > **Availability:** The application is hosted using a free PythonAnywhere account and is expected to remain available until **17 September 2026**.
 
-## Quick Links
+## 🔗 Quick Links
 
 - [Open the hosted application](https://leahchristina.eu.pythonanywhere.com)
 - [Main Features](#main-features)
@@ -25,9 +19,9 @@ The application was developed for the Web Services and Applications module. It d
 - [Local Installation](#local-installation)
 - [Running the Automated Tests](#running-the-automated-tests)
 
-## Project Purpose
+## 🎯 Project Purpose
 
-I wanted to create something that would be useful in my current role. Production planning is currently completed using manual calculations and spreadsheets. This can make it difficult to compare demand against available capacity, identify shortfalls and understand the effect of taking a machine out of service for maintenance.
+I wanted to create something that would be useful in my current role as a Process Engineer in continuous glucose monitoring manufacturing. Production planning is currently completed using manual calculations and spreadsheets. This can make it difficult to compare demand against available capacity, identify shortfalls and understand the effect of taking a machine out of service for maintenance.
 
 This project is a simplified, fictionalised version of a tool that could support production-planning activities in my current role, with company intellectual property removed.
 
@@ -45,7 +39,7 @@ The Production Capacity Scenario Planner provides a browser-based system that al
 
 > **Data protection note:** All machine, product and demand names in this repository are fictional. Leonardo, Raphael, Donatello and Michelangelo are used as fictional machine types to avoid exposing company intellectual property.
 
-## Main Features
+## ✨ Main Features
 
 | Area | Capability |
 |---|---|
@@ -60,7 +54,7 @@ The Production Capacity Scenario Planner provides a browser-based system that al
 | Testing | Run automated API and calendar-rule tests |
 | Hosting | Access the deployed application through PythonAnywhere |
 
-### 1. Machine Management
+### 1. ⚙️ Machine Management
 
 Users can:
 
@@ -72,7 +66,7 @@ Users can:
 
 Machines can be decommissioned rather than permanently removed. This soft-delete approach preserves machine information for historical planning records, while the permanent-delete option is available for erroneous entries.
 
-### 2. Production Demand Management
+### 2. 📦 Production Demand Management
 
 Users can:
 
@@ -111,7 +105,7 @@ A CSV template can be downloaded from the application or directly from:
 /api/demand/template.csv
 ```
 
-### 3. Production Planning
+### 3. 📅 Production Planning
 
 The user selects a planning month and generates a production plan.
 
@@ -173,7 +167,7 @@ A read-only XML endpoint is also provided to demonstrate an alternative web-serv
 /api/planning-summary.xml?year=2026&month=8
 ```
 
-## Suggested Demonstration
+## 🧭 Suggested Demonstration
 
 To explore the application:
 
@@ -187,7 +181,7 @@ To explore the application:
 8. Export the production schedule to CSV.
 9. Open the XML planning-summary endpoint.
 
-## Technologies Used
+## 🛠️ Technologies Used
 
 - **Back end:** Python and Flask
 - **Database:** SQLite and Python's `sqlite3` module
@@ -199,7 +193,7 @@ To explore the application:
 - **Hosting:** PythonAnywhere
 
 
-## Project Structure
+## 📁 Project Structure
 
 ```text
 wsaa-project/
@@ -229,7 +223,7 @@ wsaa-project/
     └── test_planner.py
 ```
 
-## Local Installation
+## 💻 Local Installation
 
 ### Requirements
 
@@ -298,3 +292,29 @@ A successful test run should end with:
 ```text
 OK
 ```
+## 🤖 AI Use
+
+Artificial intelligence assistance was used during the development of this project to support:
+
+- Incremental code development
+- Debugging and error identification
+- Front-end layout and CSS suggestions
+- README icons
+- Test-case suggestions
+
+The application was developed incrementally. Database operations, REST API endpoints, validation rules, front-end features and planning calculations were run and tested throughout development.
+
+AI-generated suggestions were reviewed, adapted and tested before being included in the final project. The project uses fictional machine and product information to avoid exposing company intellectual property.
+
+---
+
+## 👤 Author
+
+**Leah Curran**
+
+Web Services and Applications Project  
+Higher Diploma in Data Analytics
+
+- **GitHub:** https://github.com/leahchristina
+- **Repository:** https://github.com/leahchristina/wsaa-project
+- **Hosted application:** https://leahchristina.pythonanywhere.com
