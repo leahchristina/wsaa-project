@@ -171,7 +171,7 @@ A read-only XML endpoint is also provided to demonstrate an alternative web-serv
 
 To explore the application:
 
-1. Open the [hosted application](https://leahchristina.pythonanywhere.com).
+1. Open the [hosted application](https://leahchristina.eu.pythonanywhere.com).
 2. Review the active and decommissioned machines.
 3. Add or import a monthly demand record.
 4. Select a planning month (e.g. August).
