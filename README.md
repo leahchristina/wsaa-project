@@ -8,7 +8,9 @@ The application was developed for the Web Services and Applications module. It d
 
 The hosted application will be available at:
 
-**Hosted URL:** To be added after deployment to PythonAnywhere.
+**Hosted URL:** https://leahchristina.pytho**nywhere.com
+
+Note that this has been hosted on PythonAnywhere under a free domain. The webpage will be available until **September 17, 2026.**
 
 ## GitHub Repository
 
