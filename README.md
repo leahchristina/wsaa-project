@@ -4,7 +4,7 @@ This is a Flask web application for managing production machines, recording mont
 
 The application was developed for my Big Project portion the Web Services and Applications module. It demonstrates some of the topics covered throughout the module - RESTful APIs, CRUD operations, JSON, XML, CSV processing, HTTP methods and status codes, SQLite, Python, HTML, JavaScript, AJAX and CSS.
 
-## 🚀 Hosted Application
+## Hosted Application
 
 [![Open Hosted Application](https://img.shields.io/badge/Open%20Application-PythonAnywhere-2E4AED?style=for-the-badge)](https://leahchristina.eu.pythonanywhere.com)
 
@@ -19,7 +19,7 @@ The application was developed for my Big Project portion the Web Services and Ap
 - [Local Installation](#local-installation)
 - [Running the Automated Tests](#running-the-automated-tests)
 
-## 🎯 Project Purpose
+## Project Purpose
 
 I wanted to create something that would be useful in my current role as a Process Engineer in continuous glucose monitoring manufacturing. Production planning is currently completed using manual calculations and spreadsheets. This can make it difficult to compare demand against available capacity, identify shortfalls and understand the effect of taking a machine out of service for maintenance.
 
@@ -39,7 +39,7 @@ The Production Capacity Scenario Planner provides a browser-based system that al
 
 > **Data protection note:** All machine, product and demand names in this repository are fictional. Leonardo, Raphael, Donatello and Michelangelo are used as fictional machine types to avoid exposing company intellectual property.
 
-## ✨ Main Features
+## Main Features
 
 | Area | Capability |
 |---|---|
@@ -167,7 +167,7 @@ A read-only XML endpoint is also provided to demonstrate an alternative web-serv
 /api/planning-summary.xml?year=2026&month=8
 ```
 
-## 🧭 Suggested Demonstration
+## Suggested Demonstration
 
 To explore the application:
 
@@ -181,7 +181,7 @@ To explore the application:
 8. Export the production schedule to CSV.
 9. Open the XML planning-summary endpoint.
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - **Back end:** Python and Flask
 - **Database:** SQLite and Python's `sqlite3` module
