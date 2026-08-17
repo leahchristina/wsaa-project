@@ -143,8 +143,7 @@ For example, demand assigned to `LEON` can be allocated to active machines such 
 The generated plan displays:
 
 - Total required lots
-- Total allocated lots
-- Total unallocated lots
+- Total allocated & unallocated lots
 - Feasibility status
 - Planned completion date
 - Capacity by machine type
@@ -181,7 +180,7 @@ To explore the application:
 1. Open the [hosted application](https://leahchristina.pythonanywhere.com).
 2. Review the active and decommissioned machines.
 3. Add or import a monthly demand record.
-4. Select a planning month.
+4. Select a planning month (e.g. August).
 5. Click **Generate Plan**.
 6. Review the capacity summary and daily production schedule.
 7. Check whether any demand is unallocated.
@@ -199,29 +198,6 @@ To explore the application:
 - **Version control:** Git and GitHub
 - **Hosting:** PythonAnywhere
 
-## Application Architecture
-
-```text
-Browser Interface
-       |
-       | Fetch / AJAX
-       v
-Flask REST API
-       |
-       +-------------------+
-       |                   |
-       v                   v
-DAO Layer             Planning Service
-       |                   |
-       v                   |
-SQLite Database <----------+
-```
-
-- The browser interface does not connect directly to SQLite.
-- Flask receives and validates HTTP requests.
-- DAO modules contain the SQL database operations.
-- The planning service calculates capacity and creates the daily schedule.
-- API responses are returned primarily as JSON, with one XML endpoint for an alternative data representation.
 
 ## Project Structure
 
