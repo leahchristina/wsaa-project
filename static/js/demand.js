@@ -1,11 +1,15 @@
 async function loadDemand() {
-    const tableBody = document.getElementById("demand-table-body");
+    const tableBody = document.getElementById(
+        "demand-table-body"
+    );
 
     try {
         const response = await fetch("/api/demand");
 
         if (!response.ok) {
-            throw new Error("Could not retrieve demand records.");
+            throw new Error(
+                "Could not retrieve demand records."
+            );
         }
 
         const demandRecords = await response.json();
@@ -21,46 +25,46 @@ async function loadDemand() {
                 <td>${demand.machine_type}</td>
                 <td>${demand.required_lots}</td>
                 <td>${demand.required_date}</td>
-                <td>${demand.active ? "Active" : "Inactive"}</td>
                 <td>
-<td>
-    <button
-        type="button"
-        onclick="prepareDemandUpdate(${demand.id})"
-    >
-        Update
-    </button>
+                    ${demand.active ? "Active" : "Inactive"}
+                </td>
+                <td>
+                    <button
+                        type="button"
+                        onclick="prepareDemandUpdate(${demand.id})"
+                    >
+                        Update
+                    </button>
 
-    ${
-        demand.active
-            ? `
-                <button
-                    type="button"
-                    onclick="deactivateDemand(${demand.id})"
-                >
-                    Deactivate
-                </button>
-            `
-            : `
-                <button
-                    type="button"
-                    class="reactivate-button"
-                    onclick="reactivateDemand(${demand.id})"
-                >
-                    Reactivate
-                </button>
-            `
-    }
+                    ${
+                        demand.active
+                            ? `
+                                <button
+                                    type="button"
+                                    class="deactivate-button"
+                                    onclick="deactivateDemand(${demand.id})"
+                                >
+                                    Deactivate
+                                </button>
+                            `
+                            : `
+                                <button
+                                    type="button"
+                                    class="reactivate-button"
+                                    onclick="reactivateDemand(${demand.id})"
+                                >
+                                    Reactivate
+                                </button>
+                            `
+                    }
 
-    <button
-        type="button"
-        class="delete-button"
-        onclick="deleteDemand(${demand.id})"
-    >
-        Delete
-    </button>
-</td>
-
+                    <button
+                        type="button"
+                        class="delete-button"
+                        onclick="deleteDemand(${demand.id})"
+                    >
+                        Delete
+                    </button>
                 </td>
             `;
 
@@ -93,7 +97,9 @@ async function saveDemand(event) {
         "demand-form-message"
     );
 
-    const demandId = document.getElementById("demand-id").value;
+    const demandId = document.getElementById(
+        "demand-id"
+    ).value;
 
     const demand = {
         product_code: document
@@ -111,7 +117,9 @@ async function saveDemand(event) {
             .value,
 
         required_lots: Number(
-            document.getElementById("required-lots").value
+            document.getElementById(
+                "required-lots"
+            ).value
         ),
 
         required_date: document
@@ -196,8 +204,9 @@ async function prepareDemandUpdate(demandId) {
         document.getElementById("required-date").value =
             demand.required_date;
 
-        document.getElementById("demand-active").checked =
-            demand.active;
+        document.getElementById(
+            "demand-active"
+        ).checked = demand.active;
 
         document.getElementById(
             "demand-submit-button"
@@ -210,7 +219,9 @@ async function prepareDemandUpdate(demandId) {
         message.textContent =
             "Update the demand details below.";
 
-        document.getElementById("demand-form").scrollIntoView({
+        document.getElementById(
+            "demand-form"
+        ).scrollIntoView({
             behavior: "smooth"
         });
     } catch (error) {
@@ -301,6 +312,7 @@ async function updateDemandStatus(demandId, demand) {
     return result;
 }
 
+
 async function deleteDemand(demandId) {
     try {
         const demand = await getDemandRecord(demandId);
@@ -355,12 +367,17 @@ async function deleteDemand(demandId) {
 
 
 function resetDemandForm() {
-    const form = document.getElementById("demand-form");
+    const form = document.getElementById(
+        "demand-form"
+    );
 
     form.reset();
 
     document.getElementById("demand-id").value = "";
-    document.getElementById("demand-active").checked = true;
+
+    document.getElementById(
+        "demand-active"
+    ).checked = true;
 
     document.getElementById(
         "demand-submit-button"
@@ -375,6 +392,7 @@ function resetDemandForm() {
     ).textContent = "";
 }
 
+
 async function importDemandCsv() {
     const fileInput = document.getElementById(
         "demand-csv-file"
@@ -385,7 +403,9 @@ async function importDemandCsv() {
     );
 
     if (fileInput.files.length === 0) {
-        message.textContent = "Please select a CSV file.";
+        message.textContent =
+            "Please select a CSV file.";
+
         return;
     }
 
@@ -394,7 +414,8 @@ async function importDemandCsv() {
 
     formData.append("file", selectedFile);
 
-    message.textContent = "Importing demand records...";
+    message.textContent =
+        "Importing demand records...";
 
     try {
         const response = await fetch(
@@ -417,7 +438,8 @@ async function importDemandCsv() {
                         `Row ${detail.row}: ${detail.message}`
                 );
 
-                errorMessage += " " + rowErrors.join(" ");
+                errorMessage +=
+                    " " + rowErrors.join(" ");
             }
 
             throw new Error(errorMessage);
@@ -425,7 +447,7 @@ async function importDemandCsv() {
 
         message.textContent =
             `${result.records_imported} demand records ` +
-            `imported successfully.`;
+            "imported successfully.";
 
         fileInput.value = "";
 
@@ -436,30 +458,36 @@ async function importDemandCsv() {
 }
 
 
-document.addEventListener("DOMContentLoaded", function () {
-    loadDemand();
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+        loadDemand();
 
-    const demandForm =
-        document.getElementById("demand-form");
+        const demandForm = document.getElementById(
+            "demand-form"
+        );
 
-    const cancelButton =
-        document.getElementById(
+        const cancelButton = document.getElementById(
             "cancel-demand-update-button"
         );
 
-    demandForm.addEventListener("submit", saveDemand);
+        const importButton = document.getElementById(
+            "import-csv-button"
+        );
 
-    cancelButton.addEventListener(
-        "click",
-        resetDemandForm
-    );
+        demandForm.addEventListener(
+            "submit",
+            saveDemand
+        );
 
-    const importButton = document.getElementById(
-    "import-csv-button"
+        cancelButton.addEventListener(
+            "click",
+            resetDemandForm
+        );
+
+        importButton.addEventListener(
+            "click",
+            importDemandCsv
+        );
+    }
 );
-
-importButton.addEventListener(
-    "click",
-    importDemandCsv
-);
-});

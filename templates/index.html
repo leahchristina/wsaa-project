@@ -17,7 +17,7 @@
 <body>
     <header>
         <h1>Production Capacity Planner</h1>
-        <p>Manage production machines and daily capacity.</p>
+        <p>Manage Cleanroom machine availability and schedule monthly capacity.</p>
     </header>
 
     <main>
@@ -302,7 +302,9 @@
         <strong id="completion-date">Not Available</strong>
     </div>
 </div>
-    <h3>Capacity Summary</h3>
+<h3 class="planning-section-heading">
+    Capacity Summary
+</h3>
 
     <div class="table-wrapper">
         <table>
@@ -318,17 +320,19 @@
                 </tr>
             </thead>
 
-            <tbody id="planning-table-body">
-                <tr>
-                    <td colspan="7">
-                        Planning results will appear here.
-                    </td>
-                </tr>
-            </tbody>
+<tbody id="planning-table-body">
+    <tr>
+        <td colspan="7">
+            Planning results will appear here.
+        </td>
+    </tr>
+</tbody>
         </table>
     </div>
 
-    <h3>Daily Production Schedule</h3>
+    <h3 class="planning-section-heading">
+    Daily Production Schedule
+</h3>
 
     <div class="table-wrapper">
         <table>
@@ -380,17 +384,6 @@
         </div>
     </div>
 </div>
-
-            <tbody id="planning-table-body">
-                <tr>
-                    <td colspan="7">
-                        Planning results will appear here.
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</section>
 
 <script src="{{ url_for('static', filename='js/machines.js') }}"></script>
 <script src="{{ url_for('static', filename='js/demand.js') }}"></script>
