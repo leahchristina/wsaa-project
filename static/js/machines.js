@@ -49,6 +49,13 @@ ${
 </button>
         `
 }
+<button
+    type="button"
+    class="delete-button"
+    onclick="deleteMachine(${machine.id})"
+>
+    Delete
+</button>
     </td>
 `;
 
@@ -265,6 +272,66 @@ async function recommissionMachine(machineId) {
         if (!updateResponse.ok) {
             throw new Error(result.message || result.error);
         }
+
+        await loadMachines();
+    } catch (error) {
+        window.alert(error.message);
+    }
+}
+
+async function getMachineRecord(machineId) {
+    const response = await fetch(
+        `/api/machines/${machineId}`
+    );
+
+    if (!response.ok) {
+        throw new Error("Could not retrieve the machine.");
+    }
+
+    return await response.json();
+}
+
+async function deleteMachine(machineId) {
+    const machine = await getMachineRecord(machineId);
+
+    const confirmed = window.confirm(
+        `Permanently delete ${machine.machine_code} - ` +
+        `${machine.machine_name}?\n\n` +
+        "This action cannot be undone. " +
+        "Use Decommission instead if the machine should be " +
+        "retained for historical purposes."
+    );
+
+    if (!confirmed) {
+        return;
+    }
+
+    try {
+        const response = await fetch(
+            `/api/machines/${machineId}`,
+            {
+                method: "DELETE"
+            }
+        );
+
+        if (!response.ok) {
+            let errorMessage = "Could not delete the machine.";
+
+            try {
+                const result = await response.json();
+                errorMessage = result.message || result.error;
+            } catch {
+                // A 204 response has no JSON body.
+            }
+
+            throw new Error(errorMessage);
+        }
+
+        resetMachineForm();
+
+        document.getElementById(
+            "form-message"
+        ).textContent = "Machine deleted successfully.";
 
         await loadMachines();
     } catch (error) {

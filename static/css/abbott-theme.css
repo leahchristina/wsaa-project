@@ -1,0 +1,490 @@
+/* Abbott-inspired brand theme */
+
+:root {
+    --abbott-signature-*lue: #000075;
+    --abbott-bright-*lue: #2e4aed;
+    --abbott-cyan: #*0bfde;
+    --abbott-purple: #8054f*;
+    --*bbott-pink: #d871*a;
+    --abbott-coral: #f26b43;
+  * --*bbott-accent-pink: #ff2652;
+    --*bbott-dark-steel: #344042;
+    --*bbott-light-blue: #e4eeef;
+    --*bbott-p*le-lilac: #d6dbfc;
+    --*bbott-white**#ffffff;
+}
+
+/* Overall page */
+
+body {
+    background:
+        *inear-gradient(
+            135deg*
+            rgba(214* 219, 252, 0.65),
+            rgba*228, 238, 239, 0.85*
+        );
+    color: var(--abbot*-dark-steel);
+    font-family:
+   *    "Wallace Sans",
+        "*egoe UI",
+        Arial,
+        sans-serif;
+}
+
+/* Main branded header */
+
+body header {
+    position: relative;
+    overflow: hidden;
+    padding: 48px 24px 54px;
+    background-color: #000075;
+    background-image:
+        linear-gradient(
+            110deg,
+            #000075 0%,
+            #000075 38%,
+            #1727b8 70%,
+            #2e4aed 100%
+        );
+    color: #ffffff;
+    text-align: left;
+    box-shadow: 0 8px 28px rgba(0, 0, 117, 0.22);
+}
+
+body header::before {
+    position: absolute;
+    top: -155px;
+    right: -70px;
+    width: 390px;
+    height: 390px;
+    border: 65px solid rgba(255, 255, 255, 0.13);
+    border-radius: 50%;
+    content: "";
+}
+
+body header::after {
+    position: absolute;
+    right: 280px;
+    bottom: -160px;
+    width: 290px;
+    height: 290px;
+    border: 48px solid rgba(150, 163, 245, 0.24);
+    border-radius: 50%;
+    content: "";
+}
+
+
+body header h1,
+body header p {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+body header h1 {
+    margin-bottom: 10px;
+    font-family:
+        "Wallace Serif Light",
+        Georgia,
+        serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+}
+
+body header p {
+    font-size: 1.05rem;
+    opacity: 0.92;
+}
+
+body header {
+    border-bottom: 7px solid #00bfde;
+}
+
+/* Content cards */
+
+body section {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(46, 74, 237, 0.12);
+    border-radius: 13px;
+    box-shadow:
+        0 10px 30px rgba(52, 64, 66, 0.08),
+        0 2px 6px rgba(0, 0, 117, 0.05);
+}
+
+body section::before {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 6px;
+    background:
+        linear-gradient(
+            90deg,
+            var(--abbott-bright-blue),
+            var(--abbott-cyan),
+            var(--abbott-purple),
+            var(--abbott-pink),
+            var(--abbott-coral)
+        );
+    content: "";
+}
+
+body section h2 {
+    margin-top: 7px;
+    font-family:
+        "Wallace Serif Light",
+        Georgia,
+        serif;
+    color: var(--abbott-dark-steel);
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+body section h3 {
+    color: var(--abbott-signature-blue);
+}
+
+/* Colour variation across major cards */
+
+body main section:nth-of-type(1)::before {
+    background:
+        linear-gradient(
+            90deg,
+            var(--abbott-bright-blue),
+            var(--abbott-cyan)
+        );
+}
+
+body main section:nth-of-type(2)::before {
+    background:
+        linear-gradient(
+            90deg,
+            var(--abbott-cyan),
+            var(--abbott-purple)
+        );
+}
+
+body main section:nth-of-type(3)::before {
+    background:
+        linear-gradient(
+            90deg,
+            var(--abbott-purple),
+            var(--abbott-pink)
+        );
+}
+
+body main section:nth-of-type(4)::before {
+    background:
+        linear-gradient(
+            90deg,
+            var(--abbott-pink),
+            var(--abbott-coral),
+            var(--abbott-accent-pink)
+        );
+}
+
+/* Forms */
+
+body label {
+    color: var(--abbott-dark-steel);
+}
+
+body input[type="text"],
+body input[type="number"],
+body input[type="date"],
+body input[type="month"],
+body input[type="file"],
+body select {
+    border: 1px solid #a8baba;
+    background-color: var(--abbott-white);
+    color: var(--abbott-dark-steel);
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+body input:focus,
+body select:focus {
+    border-color: var(--abbott-bright-blue);
+    outline: none;
+    box-shadow:
+        0 0 0 4px rgba(46, 74, 237, 0.17);
+}
+
+body input[type="checkbox"] {
+    accent-color: var(--abbott-bright-blue);
+}
+
+/* Primary action buttons */
+
+body #submit-button,
+body #demand-submit-button,
+body #generate-plan-button {
+    background:
+        linear-gradient(
+            135deg,
+            var(--abbott-bright-blue),
+            var(--abbott-purple)
+        );
+    color: var(--abbott-white);
+    box-shadow: 0 4px 12px rgba(46, 74, 237, 0.25);
+}
+
+body #submit-button:hover,
+body #demand-submit-button:hover,
+body #generate-plan-button:hover {
+    background:
+        linear-gradient(
+            135deg,
+            var(--abbott-signature-blue),
+            var(--abbott-bright-blue)
+        );
+    transform: translateY(-1px);
+}
+
+/* Secondary buttons */
+
+body #cancel-update-button,
+body #cancel-demand-update-button {
+    background-color: var(--abbott-dark-steel);
+    color: var(--abbott-white);
+}
+
+body #export-csv-button {
+    padding: 10px 18px;
+    border: 1px solid var(--abbott-purple);
+    border-radius: 5px;
+    background-color: var(--abbott-white);
+    color: var(--abbott-purple);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+body #export-csv-button:hover:not(:disabled) {
+    background-color: var(--abbott-pale-lilac);
+}
+
+body #export-csv-button:disabled {
+    border-color: #a8baba;
+    color: #7a8587;
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+/* CSV import panel */
+
+body #csv-import-section {
+    border: 1px solid rgba(128, 84, 242, 0.35);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(214, 219, 252, 0.62),
+            rgba(228, 238, 239, 0.72)
+        );
+}
+
+body #csv-import-section h3 {
+    color: var(--abbott-purple);
+}
+
+body #import-csv-button {
+    background:
+        linear-gradient(
+            135deg,
+            var(--abbott-cyan),
+            var(--abbott-bright-blue)
+        );
+    color: var(--abbott-white);
+}
+
+body #import-csv-button:hover {
+    background:
+        linear-gradient(
+            135deg,
+            var(--abbott-bright-blue),
+            var(--abbott-signature-blue)
+        );
+}
+
+body #download-template-button {
+    border-color: var(--abbott-purple);
+    background-color: var(--abbott-white);
+    color: var(--abbott-purple);
+}
+
+body #download-template-button:hover {
+    background-color: var(--abbott-pale-lilac);
+}
+
+/* Tables */
+
+body table thead {
+    background:
+        linear-gradient(
+            90deg,
+            var(--abbott-signature-blue),
+            var(--abbott-bright-blue)
+        );
+    color: var(--abbott-white);
+}
+
+body th {
+    border-bottom: 3px solid var(--abbott-cyan);
+}
+
+body tbody tr:nth-child(even) {
+    background-color: rgba(228, 238, 239, 0.7);
+}
+
+body tbody tr:nth-child(odd) {
+    background-color: var(--abbott-white);
+}
+
+body tbody tr:hover {
+    background-color: var(--abbott-pale-lilac);
+}
+
+/* Table action buttons */
+
+body td button:first-child {
+    background-color: var(--abbott-bright-blue);
+    color: var(--abbott-white);
+}
+
+body td button:first-child:hover {
+    background-color: var(--abbott-signature-blue);
+}
+
+body td button:last-child {
+    background-color: var(--abbott-coral);
+    color: var(--abbott-white);
+}
+
+body td button:last-child:hover {
+    background-color: var(--abbott-accent-pink);
+}
+
+body td button.recommission-button,
+body td button.reactivate-button {
+    background-color: var(--abbott-purple);
+    color: var(--abbott-white);
+}
+
+body td button.recommission-button:hover,
+body td button.reactivate-button:hover {
+    background-color: var(--abbott-pink);
+}
+
+body td button.delete-button {
+    border: 1px solid var(--abbott-accent-pink);
+    background-color: var(--abbott-white);
+    color: var(--abbott-accent-pink);
+}
+
+body td button.delete-button:hover {
+    background-color: var(--abbott-accent-pink);
+    color: var(--abbott-white);
+}
+
+/* Planning summary cards */
+
+body #plan-overview .summary-card {
+    position: relative;
+    overflow: hidden;
+    border: none;
+    box-shadow: 0 6px 18px rgba(52, 64, 66, 0.09);
+}
+
+body #plan-overview .summary-card:nth-child(1) {
+    background-color: var(--abbott-pale-lilac);
+}
+
+body #plan-overview .summary-card:nth-child(2) {
+    background-color: rgba(0, 191, 222, 0.18);
+}
+
+body #plan-overview .summary-card:nth-child(3) {
+    background-color: rgba(216, 113, 234, 0.17);
+}
+
+body #plan-overview .summary-card:nth-child(4) {
+    background-color: rgba(242, 107, 67, 0.16);
+}
+
+body #plan-overview .summary-card:nth-child(5) {
+    background-color: var(--abbott-light-blue);
+}
+
+body .summary-card span {
+    color: var(--abbott-dark-steel);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+body .summary-card strong {
+    color: var(--abbott-signature-blue);
+    font-family:
+        "Wallace Serif Light",
+        Georgia,
+        serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+body .status-feasible {
+    color: var(--abbott-bright-blue) !important;
+}
+
+body .status-shortfall {
+    color: var(--abbott-accent-pink) !important;
+}
+
+/* Messages */
+
+body #form-message,
+body #demand-form-message,
+body #csv-import-message,
+body #planning-message {
+    color: var(--abbott-bright-blue);
+}
+
+/* Subtle movement for interactive controls */
+
+body button {
+    transition:
+        transform 0.15s ease,
+        background-color 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+body button:hover:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+/* Mobile adjustments */
+
+@media (max-width: 750px) {
+    body header {
+        padding: 34px 18px;
+        text-align: center;
+    }
+
+    body header::before,
+    body header::after {
+        opacity: 0.55;
+    }
+
+    body section h2 {
+        font-size: 1.7rem;
+    }
+
+    body #plan-overview {
+        grid-template-columns: 1fr;
+    }
+}

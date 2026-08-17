@@ -9,6 +9,7 @@ import planner
 
 import csv
 import io
+import re
 
 import xml.etree.ElementTree as ET
 
@@ -33,35 +34,83 @@ def validate_machine(machine_data):
         if field not in machine_data:
             return f"Missing required field: {field}"
 
-    if not isinstance(machine_data["machine_code"], str):
+    machine_code = machine_data["machine_code"]
+    machine_name = machine_data["machine_name"]
+    production_area = machine_data["production_area"]
+    daily_capacity = machine_data["daily_capacity"]
+
+    if not isinstance(machine_code, str):
         return "Machine code must be text."
 
-    if not machine_data["machine_code"].strip():
-        return "Machine code cannot be empty."
+    machine_code = machine_code.strip().upper()
 
-    if not isinstance(machine_data["machine_name"], str):
-        return "Machine name must be text."
+    valid_code_pattern = r"^(LEON|RAPH|DONA|MICH)-([0-9]{2})$"
 
-    if not machine_data["machine_name"].strip():
-        return "Machine name cannot be empty."
+    code_match = re.fullmatch(
+        valid_code_pattern,
+        machine_code
+    )
 
-    if not isinstance(machine_data["production_area"], str):
+    if code_match is None:
+        return (
+            "Machine code must use LEON, RAPH, DONA or MICH "
+            "followed by a two-digit number, for example LEON-01."
+        )
+
+    machine_number = int(code_match.group(2))
+
+    if machine_number < 1:
+        return "Machine number must be between 01 and 99."
+
+    valid_machine_names = {
+        "LEON": "Leonardo",
+        "RAPH": "Raphael",
+        "DONA": "Donatello",
+        "MICH": "Michelangelo"
+    }
+
+    expected_area = code_match.group(1)
+
+    if not isinstance(production_area, str):
         return "Production area must be text."
 
-    if not machine_data["production_area"].strip():
-        return "Production area cannot be empty."
+    production_area = production_area.strip().upper()
 
-    capacity = machine_data["daily_capacity"]
+    if production_area != expected_area:
+        return (
+            f"Production area must be {expected_area} "
+            f"for machine code {machine_code}."
+        )
 
-    if not isinstance(capacity, int) or isinstance(capacity, bool):
+    if not isinstance(machine_name, str):
+        return "Machine name must be text."
+
+    expected_name = (
+        f"{valid_machine_names[expected_area]} "
+        f"Machine {machine_number}"
+    )
+
+    if machine_name.strip() != expected_name:
+        return (
+            f"Machine name must be '{expected_name}' "
+            f"for machine code {machine_code}."
+        )
+
+    if (
+        not isinstance(daily_capacity, int)
+        or isinstance(daily_capacity, bool)
+    ):
         return "Daily capacity must be a whole number."
 
-    if capacity <= 0:
+    if daily_capacity <= 0:
         return "Daily capacity must be greater than zero."
 
     if "active" in machine_data:
         if not isinstance(machine_data["active"], bool):
             return "Active must be true or false."
+
+    machine_data["machine_code"] = machine_code
+    machine_data["production_area"] = production_area
 
     return None
 

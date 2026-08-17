@@ -35,12 +35,12 @@ class TestApi(unittest.TestCase):
 
 def test_invalid_machine_capacity_returns_400(self):
     invalid_machine = {
-        "machine_code": "TEST-INVALID",
-        "machine_name": "Invalid Test Machine",
-        "production_area": "TEST",
-        "daily_capacity": 0,
-        "active": True
-    }
+    "machine_code": "LEON-99",
+    "machine_name": "Leonardo Machine 99",
+    "production_area": "LEON",
+    "daily_capacity": 0,
+    "active": True
+}
 
     response = self.client.post(
         "/api/machines",

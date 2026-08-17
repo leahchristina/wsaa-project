@@ -23,33 +23,44 @@ async function loadDemand() {
                 <td>${demand.required_date}</td>
                 <td>${demand.active ? "Active" : "Inactive"}</td>
                 <td>
-                    <button
-                        type="button"
-                        onclick="prepareDemandUpdate(${demand.id})"
-                    >
-                        Update
-                    </button>
+<td>
+    <button
+        type="button"
+        onclick="prepareDemandUpdate(${demand.id})"
+    >
+        Update
+    </button>
 
-                    ${
-                        demand.active
-                            ? `
-                                <button
-                                    type="button"
-                                    onclick="deactivateDemand(${demand.id})"
-                                >
-                                    Deactivate
-                                </button>
-                            `
-                            : `
-                                <button
-                                    type="button"
-                                    class="reactivate-button"
-                                    onclick="reactivateDemand(${demand.id})"
-                                >
-                                    Reactivate
-                                </button>
-                            `
-                    }
+    ${
+        demand.active
+            ? `
+                <button
+                    type="button"
+                    onclick="deactivateDemand(${demand.id})"
+                >
+                    Deactivate
+                </button>
+            `
+            : `
+                <button
+                    type="button"
+                    class="reactivate-button"
+                    onclick="reactivateDemand(${demand.id})"
+                >
+                    Reactivate
+                </button>
+            `
+    }
+
+    <button
+        type="button"
+        class="delete-button"
+        onclick="deleteDemand(${demand.id})"
+    >
+        Delete
+    </button>
+</td>
+
                 </td>
             `;
 
@@ -288,6 +299,58 @@ async function updateDemandStatus(demandId, demand) {
     }
 
     return result;
+}
+
+async function deleteDemand(demandId) {
+    try {
+        const demand = await getDemandRecord(demandId);
+
+        const confirmed = window.confirm(
+            `Permanently delete ${demand.product_code} - ` +
+            `${demand.product_name}?\n\n` +
+            "This action cannot be undone. " +
+            "Use Deactivate instead if the demand should be " +
+            "retained for historical purposes."
+        );
+
+        if (!confirmed) {
+            return;
+        }
+
+        const response = await fetch(
+            `/api/demand/${demandId}`,
+            {
+                method: "DELETE"
+            }
+        );
+
+        if (!response.ok) {
+            let errorMessage =
+                "Could not delete the demand record.";
+
+            try {
+                const result = await response.json();
+
+                errorMessage =
+                    result.message || result.error;
+            } catch {
+                // A successful 204 response has no JSON body.
+            }
+
+            throw new Error(errorMessage);
+        }
+
+        resetDemandForm();
+
+        document.getElementById(
+            "demand-form-message"
+        ).textContent =
+            "Demand record deleted successfully.";
+
+        await loadDemand();
+    } catch (error) {
+        window.alert(error.message);
+    }
 }
 
 
