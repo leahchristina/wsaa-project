@@ -18,7 +18,7 @@ The application was developed for the Web Services and Applications module. It d
 
 ## Quick Links
 
-- [Open the hosted application](https://leahchristina.pythonanywhere.com)
+- [Open the hosted application](https://leahchristina.eu.pythonanywhere.com)
 - [Main Features](#main-features)
 - [Suggested Demonstration](#suggested-demonstration)
 - [Technologies Used](#technologies-used)
