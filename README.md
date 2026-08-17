@@ -12,7 +12,7 @@ The application was developed for the Web Services and Applications module. It d
 
 ## Hosted Application
 
-[![Open Hosted Application](https://img.shields.io/badge/Open%20Application-PythonAnywhere-2E4AED?style=for-the-badge)](https://leahchristina.pythonanywhere.com)
+[![Open Hosted Application](https://img.shields.io/badge/Open%20Application-PythonAnywhere-2E4AED?style=for-the-badge)](https://leahchristina.eu.pythonanywhere.com)
 
 > **Availability:** The application is hosted using a free PythonAnywhere account and is expected to remain available until **17 September 2026**.
 
