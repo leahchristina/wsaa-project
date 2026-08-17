@@ -1,46 +1,40 @@
 # Production Capacity Scenario Planner
 
-https://img.shields.io/badge/Python-3.12-2E4AED
+![Python](https://img.shields.io/badge/Python-3.12-2E4AED)
 ![Flask](https://img.shields.io/badge/Flask-Web%20API-000075)
-g.shields.io/badge/Database-SQLite-00BFDE
-![JavaScript](https://img.shields.io/badgeAX-8054F2
-![Status](https://img.shields.io/badge/Status-Deployed Flask web application for managing production machines, recording monthly production demand and generating capacity-based production plans.
+![Database](https://img.shields.io/badge/Database-SQLite-00BFDE)
+![JavaScript](https://img.shields.io/badge/JavaScript-AJAX-8054F2)
+![Status](https://img.shields.io/badge/Status-Deployed-16834A)
+
+A Flask web application for managing production machines, recording monthly production demand and generating capacity-based production plans.
 
 The application was developed for the Web Services and Applications module. It demonstrates RESTful APIs, CRUD operations, JSON, XML, CSV processing, HTTP methods and status codes, SQLite, Python, HTML, JavaScript, AJAX and CSS.
 
 ## Hosted Application
 
-https://img.shields.io/badge/Open%20Application-PythonAnywhere-2E4AED?style=for-the-badge](https://leahchristina.pythonanywhere.com)
+[![Open Hosted Application](https://img.shields.io/badge/Open%20Application-PythonAnywhere-2E4AED?style=for-the-badge)](https://leahchristina.pythonanywhere.com)
 
 > **Availability:** The application is hosted using a free PythonAnywhere account and is expected to remain available until **17 September 2026**.
 
 ## Quick Links
 
 - [Open the hosted application](https://leahchristina.pythonanywhere.com)
-- #main-features
-- #local-installation
-- #running-the-automated-tests
-- #rest-api
-- #known-limitations
-
-
-## Hosted Application
-
-[![Open Hosted Application](https://img.shields.io/badge/Open%20Application-PythonAnywhere-2E4AED?style=for-the-badge)](https://leahchristina.eu.pythonanywhere.com/)
-
-> **Availability:** This project is hosted on a free PythonAnywhere account and is expected to remain available until **17 September 2026**.
-
+- [Main Features](#main-features)
+- [Suggested Demonstration](#suggested-demonstration)
+- [Technologies Used](#technologies-used)
+- [Local Installation](#local-installation)
+- [Running the Automated Tests](#running-the-automated-tests)
 
 ## Project Purpose
 
-I wanted to create something that would be useful in my current role. Production planning is currently completed using manual calculations and spreadsheets. This can make it difficult to compare demand against available capacity, identify shortfalls and understand the effect of taking a machine out of service for maintenance. 
+I wanted to create something that would be useful in my current role. Production planning is currently completed using manual calculations and spreadsheets. This can make it difficult to compare demand against available capacity, identify shortfalls and understand the effect of taking a machine out of service for maintenance.
 
-This project is a replica of what I would require to complete production planning more effectively, with the intellectual property removed. 
+This project is a simplified, fictionalised version of a tool that could support production-planning activities in my current role, with company intellectual property removed.
 
-The Production Capacity Scenario Planner provides a simple browser-based system that allows users to:
+The Production Capacity Scenario Planner provides a browser-based system that allows users to:
 
 - Maintain a list of production machines and their daily capacities
-- Add and update the monthly production demand
+- Add and update monthly production demand
 - Import demand records from CSV files
 - Decommission and recommission machines
 - Calculate capacity by machine type
@@ -50,8 +44,6 @@ The Production Capacity Scenario Planner provides a simple browser-based system 
 - Retrieve planning information through JSON and XML APIs
 
 > **Data protection note:** All machine, product and demand names in this repository are fictional. Leonardo, Raphael, Donatello and Michelangelo are used as fictional machine types to avoid exposing company intellectual property.
-
-## Main Features
 
 ## Main Features
 
@@ -76,8 +68,9 @@ Users can:
 - View all machines
 - Update machine details and daily capacity
 - Decommission or recommission a machine
+- Permanently delete a machine entered in error
 
-Machines are decommissioned rather than permanently removed. This is a soft-delete approach that preserves machine information for historical planning records.
+Machines can be decommissioned rather than permanently removed. This soft-delete approach preserves machine information for historical planning records, while the permanent-delete option is available for erroneous entries.
 
 ### 2. Production Demand Management
 
@@ -86,13 +79,13 @@ Users can:
 - Add monthly production demand
 - View all demand records
 - Update demand details
-- Deactivate demand
-- Reactivate demand
+- Deactivate or reactivate demand
+- Permanently delete demand entered in error
 - Import multiple demand records from CSV
 
 Inactive demand remains in the database but is excluded from production planning.
 
-### CSV Import
+#### CSV Import
 
 Demand can be imported using a UTF-8 CSV file.
 
@@ -124,11 +117,11 @@ The user selects a planning month and generates a production plan.
 
 The planning logic:
 
-- Includes active machines & demand only
+- Includes active machines and active demand only
 - Matches demand to the required machine type
 - Uses each machine's configured daily lot capacity
 - Allocates demand in required-date and product-code order
-- Assumes 24/7 manufacturing (excluding 25/26 Dec)
+- Assumes 24/7 manufacturing, excluding 25 and 26 December
 - Reports any lots that cannot be allocated
 - Identifies whether the plan is feasible
 
@@ -145,7 +138,7 @@ Demand for a machine type can use any active machine whose production area match
 
 For example, demand assigned to `LEON` can be allocated to active machines such as `LEON-01` and `LEON-02`.
 
-### Planning Results
+#### Planning Results
 
 The generated plan displays:
 
@@ -158,11 +151,9 @@ The generated plan displays:
 - Daily production allocations
 - Unallocated demand and its reason
 
-### CSV Export
+#### CSV Export
 
-The generated daily schedule can be downloaded as a CSV file.
-
-The exported file contains:
+The generated daily schedule can be downloaded as a CSV file containing:
 
 ```text
 production_date
@@ -173,7 +164,7 @@ product_name
 allocated_lots
 ```
 
-### JSON and XML
+#### JSON and XML
 
 JSON is used for the main REST API requests and responses.
 
@@ -199,7 +190,7 @@ To explore the application:
 
 ## Technologies Used
 
-- **Back end:** Python, Flask
+- **Back end:** Python and Flask
 - **Database:** SQLite and Python's `sqlite3` module
 - **Front end:** HTML5, CSS3 and vanilla JavaScript
 - **Asynchronous communication:** Fetch API and AJAX
@@ -207,6 +198,30 @@ To explore the application:
 - **Testing:** Python `unittest` and Flask test client
 - **Version control:** Git and GitHub
 - **Hosting:** PythonAnywhere
+
+## Application Architecture
+
+```text
+Browser Interface
+       |
+       | Fetch / AJAX
+       v
+Flask REST API
+       |
+       +-------------------+
+       |                   |
+       v                   v
+DAO Layer             Planning Service
+       |                   |
+       v                   |
+SQLite Database <----------+
+```
+
+- The browser interface does not connect directly to SQLite.
+- Flask receives and validates HTTP requests.
+- DAO modules contain the SQL database operations.
+- The planning service calculates capacity and creates the daily schedule.
+- API responses are returned primarily as JSON, with one XML endpoint for an alternative data representation.
 
 ## Project Structure
 
@@ -222,7 +237,8 @@ wsaa-project/
 ├── README.md
 ├── static/
 │   ├── css/
-│   │   └── styles.css
+│   │   ├── styles.css
+│   │   └── abbott-theme.css
 │   └── js/
 │       ├── machines.js
 │       ├── demand.js
@@ -249,40 +265,29 @@ Before running the application, ensure the following are installed:
 
 The project was developed on Windows using Anaconda and Visual Studio Code.
 
-
-### 1. Clone the repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/leahchristina/wsaa-project.git
 cd wsaa-project
-
-Move into the project folder:
-
-```bash
-cd wsaa-project
 ```
 
-### 2. Create a Python environment
+### 2. Create a Python Environment
 
 Using Conda:
 
 ```bash
 conda create --name capacity-planner python=3.12
-```
-
-Activate the environment:
-
-```bash
 conda activate capacity-planner
 ```
 
-### 3. Install the project requirements
+### 3. Install the Project Requirements
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Create the database
+### 4. Create the Database
 
 ```bash
 python create_database.py
@@ -290,17 +295,15 @@ python create_database.py
 
 This creates the SQLite database and the required database tables if they do not already exist.
 
-### 5. Run the application
+### 5. Run the Application
 
 ```bash
 python app.py
 ```
 
-Open the following address in a browser:
+Open the application in a browser:
 
-```text
-http://127.0.0.1:5000/
-```
+[http://127.0.0.1:5000/](http://127.0.0.1:5000/)
 
 The Flask server used locally is a development server and should not be used as a production web server.
 
@@ -319,4 +322,3 @@ A successful test run should end with:
 ```text
 OK
 ```
-
