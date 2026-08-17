@@ -1,8 +1,0 @@
-{
-  "product_code": "PROD-002",
-  "product_name": "Product Beta",
-  "machine_type": "RAPH",
-  "required_lots": 20,
-  "required_date": "2026-08-31",
-  "active": true
-}
