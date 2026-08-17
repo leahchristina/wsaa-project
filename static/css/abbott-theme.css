@@ -488,3 +488,80 @@ body button:hover:not(:disabled) {
         grid-template-columns: 1fr;
     }
 }
+
+/* Final operational status colours */
+
+body table td button.decommission-button,
+body table td button.deactivate-button {
+    border: 1px solid #c3262e;
+    background-color: #c3262e;
+    color: #ffffff;
+}
+
+body table td button.decommission-button:hover,
+body table td button.deactivate-button:hover {
+    border-color: #991f25;
+    background-color: #991f25;
+    color: #ffffff;
+}
+
+body table td button.recommission-button,
+body table td button.reactivate-button {
+    border: 1px solid #16834a;
+    background-color: #16834a;
+    color: #ffffff;
+}
+
+body table td button.recommission-button:hover,
+body table td button.reactivate-button:hover {
+    border-color: #106638;
+    background-color: #106638;
+    color: #ffffff;
+}
+
+body table td button.delete-button {
+    border: 1px solid #c3262e;
+    background-color: #ffffff;
+    color: #c3262e;
+}
+
+body table td button.delete-button:hover {
+    background-color: #c3262e;
+    color: #ffffff;
+}
+
+/* Final production-plan status colours */
+
+body #plan-overview .summary-card strong.status-feasible,
+body #plan-overview .summary-card strong.value-feasible {
+    color: #16834a !important;
+}
+
+body #plan-overview .summary-card strong.status-shortfall,
+body #plan-overview .summary-card strong.value-shortfall {
+    color: #c3262e !important;
+}
+
+body #unallocated-results {
+    border-left: 5px solid #c3262e;
+    padding-left: 16px;
+}
+
+body #unallocated-results h3 {
+    color: #c3262e;
+}
+
+body #unallocated-table-body td:nth-child(5) {
+    color: #c3262e;
+    font-weight: bold;
+}
+
+body td.result-available {
+    color: #16834a;
+    font-weight: bold;
+}
+
+body td.result-shortfall {
+    color: #c3262e;
+    font-weight: bold;
+}

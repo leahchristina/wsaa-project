@@ -51,7 +51,13 @@ async function generatePlan(event) {
                 <td>${item.total_capacity}</td>
                 <td>${item.required_lots}</td>
                 <td>${item.capacity_balance}</td>
-                <td>${item.result}</td>
+                <td class="${
+    item.result === "Capacity available"
+        ? "result-available"
+        : "result-shortfall"
+}">
+    ${item.result}
+</td>
             `;
 
             tableBody.appendChild(row);
@@ -164,9 +170,17 @@ document.getElementById(
     "total-allocated-lots"
 ).textContent = totalAllocated;
 
-document.getElementById(
+const unallocatedLotsElement = document.getElementById(
     "total-unallocated-lots"
-).textContent = totalUnallocated;
+);
+
+unallocatedLotsElement.textContent = totalUnallocated;
+
+if (totalUnallocated > 0) {
+    unallocatedLotsElement.className = "value-shortfall";
+} else {
+    unallocatedLotsElement.className = "value-feasible";
+}
 
 document.getElementById(
     "completion-date"

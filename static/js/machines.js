@@ -32,12 +32,13 @@ row.innerHTML = `
 ${
     machine.active
         ? `
-            <button
-                type="button"
-                onclick="decommissionMachine(${machine.id})"
-            >
-                Decommission
-            </button>
+<button
+    type="button"
+    class="decommission-button"
+    onclick="decommissionMachine(${machine.id})"
+>
+    Decommission
+</button>
         `
         : `
             <button
